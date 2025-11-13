@@ -144,11 +144,16 @@ function generateSlug(title: string): string {
 
 // Helper function to normalize date to ISO format
 function normalizeDate(dateString: string): string {
-  const date = new Date(dateString);
-  if (isNaN(date.getTime())) {
+  const trimmed = dateString.trim();
+  const isoDayMatch = trimmed.match(/^\d{4}-\d{2}-\d{2}/);
+  if (isoDayMatch) {
+    return isoDayMatch[0];
+  }
+  const parsed = new Date(trimmed);
+  if (Number.isNaN(parsed.getTime())) {
     throw new Error("Invalid date format");
   }
-  return date.toISOString().split("T")[0]; // Return YYYY-MM-DD format
+  return parsed.toISOString().slice(0, 10); // Return YYYY-MM-DD format
 }
 
 // Helper function to normalize time format
