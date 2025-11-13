@@ -1,5 +1,4 @@
 "use client";
-
 import { useEffect, useRef, useState } from "react";
 import { Renderer, Program, Triangle, Mesh } from "ogl";
 import "./LightRays.css";
